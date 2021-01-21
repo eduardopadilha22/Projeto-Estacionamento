@@ -1,0 +1,9 @@
+.home .tittle {
+    font-size: 3rem; /*fonte de acordo com padrao do navegador*/
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.home .subtitle{
+    font-size: 1.1em;/*relacionado ao pai*/
+}

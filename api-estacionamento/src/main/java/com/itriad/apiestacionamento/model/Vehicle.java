@@ -1,10 +1,15 @@
 package com.itriad.apiestacionamento.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -13,10 +18,10 @@ import java.util.Date;
 @Getter
 public class Vehicle  implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
 
     private String placa;
 
@@ -24,13 +29,13 @@ public class Vehicle  implements Serializable {
 
     private String cor;
 
-    @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "hora_entrada")
-    private Date horaEntrada;
+    private LocalTime horaEntrada;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_entrada")
-    @Temporal(TemporalType.DATE)
-    private Date dataEntrada;
+    private LocalDate dataEntrada;
 
     @Enumerated(EnumType.STRING)
     private StatusVehicle statusVehicle;

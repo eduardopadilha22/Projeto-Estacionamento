@@ -1,10 +1,13 @@
 package com.itriad.apiestacionamento.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity(name = "exit_payment")
@@ -20,13 +23,13 @@ public class ExitPayment implements Serializable {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "hora_saida")
-    private Date horaSaida;
+    private LocalTime horaSaida;
 
-    @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_saida")
-    private Date dataSaida;
+    private LocalDate dataSaida;
 
     @Column(name = "total_pagamento")
     private Double totalPagamento;

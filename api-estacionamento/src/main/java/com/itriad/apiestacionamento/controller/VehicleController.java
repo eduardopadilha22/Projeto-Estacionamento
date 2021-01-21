@@ -5,22 +5,23 @@ import com.itriad.apiestacionamento.service.VehicleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
+
 public class VehicleController {
 
     @Autowired
     private VehicleService vehicleService;
 
     @PostMapping("/vehicle")
-    public ResponseEntity<Object> saveVehicle(@RequestBody Vehicle vehicle){
-        Object result = vehicleService.registerVehicle(vehicle);
-        return ResponseEntity.ok(result);
+    @CrossOrigin("*")
+    public Vehicle saveVehicle(@RequestBody Vehicle vehicle) throws ParseException {
+        Vehicle result = vehicleService.registerVehicle(vehicle);
+        return result;
     }
 }

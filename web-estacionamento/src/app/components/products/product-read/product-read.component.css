@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+    
+}
+
+.edit {
+    color: #F4A460 ;
+}
+
+.delete  {
+    color: #FF6347;
+
+}
+
+  .example-button-row {
+    display: table-cell;
+  }
+  
+  .example-button-row .btn1 {
+      margin: 0px;
+      padding-left: 0%;
+      width: 20px;
+  }
+
+  .example-button-row .btn2{
+    margin-right: 10px;
+    padding: 0%;
+    
+  } 
