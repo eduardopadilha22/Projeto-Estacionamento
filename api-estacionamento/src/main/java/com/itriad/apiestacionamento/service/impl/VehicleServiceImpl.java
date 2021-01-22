@@ -7,6 +7,9 @@ import com.itriad.apiestacionamento.repository.VehicleRepository;
 import com.itriad.apiestacionamento.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,10 +21,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -65,5 +65,14 @@ public class VehicleServiceImpl implements VehicleService {
 
         return vehicle;
 
+    }
+
+    @Override
+    public Page<Vehicle> findAllVehicleParked(int page, int limit) {
+        Page<Vehicle> listVehicle = null;
+        PageRequest pageable = PageRequest.of(page-1,limit, Sort.by("placa"));
+        listVehicle = vehicleRepository.findAll(pageable);
+
+        return listVehicle;
     }
 }

@@ -2,6 +2,7 @@ package com.itriad.apiestacionamento.service.impl;
 
 import com.itriad.apiestacionamento.Utils.Validate;
 import com.itriad.apiestacionamento.model.ExitPayment;
+import com.itriad.apiestacionamento.model.StatusVehicle;
 import com.itriad.apiestacionamento.model.Vehicle;
 import com.itriad.apiestacionamento.repository.ExitPaymentRepository;
 import com.itriad.apiestacionamento.repository.VehicleRepository;
@@ -30,12 +31,15 @@ public class ExitPaymentImpl implements ExitPaymentService {
         LocalDate data_exit = LocalDate.now();
         String dia = Validate.weekDay();
 
-        if (exitPaymentRepository.findByVehicleAndDataSaida(vehicle, data_exit).isPresent()) {
-            throw new RuntimeException("Veículo já foi retirado");
-        }
+//        if (exitPaymentRepository.findByVehicleAndDataSaida(vehicle, data_exit).isPresent()) {
+//            throw new RuntimeException("Veículo já foi retirado");
+//        }
 
 
         Double paymentAmount = validarDiaValor(dia, vehicle.getHoraEntrada(), hora_exit);
+
+        vehicle.setStatusVehicle(StatusVehicle.RETIRADO);
+        vehicle = vehicleRepository.save(vehicle);
 
         exitPayment.setHoraSaida(hora_exit);
         exitPayment.setDataSaida(data_exit);

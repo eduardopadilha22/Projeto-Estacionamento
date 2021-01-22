@@ -17,4 +17,13 @@ export class VeiculosService {
       return this.http.post(this.baseUrl,veiculo);
   }
 
+   veiculosEstacionadosUsingPost(pageIndex, limitIndex): Observable<any> {
+      return this.http.get(this.baseUrl,{
+        params: {
+          page: pageIndex,
+          limit: limitIndex
+        }
+      })
+   }
+
 }
