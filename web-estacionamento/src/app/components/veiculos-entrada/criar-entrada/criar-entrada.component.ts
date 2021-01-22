@@ -20,16 +20,12 @@ export class CriarEntradaComponent implements OnInit {
   }
 
   salvarVeiculo(): void {
-    // this.productService.create(this.product).subscribe(() =>{
-    //   this.productService.showMessage('produto criado com sucesso!');
-    //   this.router.navigate(['/products'])
-    // });
     this.veiculosService.salvarVeiculoUsingPost(this.veiculo).subscribe(resp => {
       console.log(resp);
-
+      this.veiculosService.showMessage('Entrada feita com Sucesso')
       this.router.navigate(['/'])
     }, err => {
-      throw new Error("errorrr");
+      this.veiculosService.showMessage(err.error.message, true)
     })
   }
 

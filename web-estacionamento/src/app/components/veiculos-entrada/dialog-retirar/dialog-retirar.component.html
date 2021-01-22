@@ -1,0 +1,46 @@
+<div mat-dialog-content >
+    <mat-card class="payment" >
+        <mat-card-header>
+          <mat-card-title>Pagamento</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+           <div class="container">
+            <div>
+            
+                <mat-card-title>Veículo</mat-card-title>
+                <p>{{payment.vehicle.placa}} </p>
+                <p>{{payment.vehicle.modelo}} </p>
+                <p>{{payment.vehicle.cor}} </p>
+                <p></p>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div>
+ 
+                <mat-card-title>Entrada e Saída</mat-card-title>
+                <p>{{payment.vehicle.horaEntrada}} até {{ payment.horaSaida }}</p>
+                <p></p>
+
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div>
+                <mat-card-title>Total a Pagar</mat-card-title>
+                <h3>{{payment.totalPagamento | currency: 'BRL'}}</h3>
+                
+            </div>
+  
+           </div>
+            
+        </mat-card-content>
+
+        
+      </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>No Thanks</button>
+    <button mat-button  color="primary">sim</button>
+</div>

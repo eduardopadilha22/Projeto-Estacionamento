@@ -1,4 +1,5 @@
-import { DialogDeleteComponent } from './components/products/product-read/dialog-delete/dialog-delete.component';
+
+import { BreakPointRegistry, FlexLayoutModule, FlexOrderStyleBuilder, FlexStyleBuilder, LayoutStyleBuilder, MediaMarshaller, PrintHook, ShowHideStyleBuilder, StylesheetMap, StyleUtils } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 
@@ -17,6 +18,7 @@ import { MatCardModule } from'@angular/material/card';
 import { MatButtonModule } from'@angular/material/button';
 import { MatSnackBarModule } from'@angular/material/snack-bar';
 import { MatDialogModule } from'@angular/material/dialog';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import { HomeComponent } from './views/home/home.component';
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
@@ -31,13 +33,14 @@ import { ProductRead2Component } from './components/products/product-read2/produ
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData} from '@angular/common';
 import { ProductUpdateComponent } from './components/products/product-update/product-update.component';
 import { VeiculosComponent } from './views/veiculos/veiculos.component';
 import { VeiculosEntradaComponent } from './components/veiculos-entrada/veiculos-entrada.component';
 import { CriarEntradaComponent } from './components/veiculos-entrada/criar-entrada/criar-entrada.component';
+import { DialogRetirarComponent } from './components/veiculos-entrada/dialog-retirar/dialog-retirar.component';
+import { RelatorioComponent } from './views/relatorio/relatorio.component';
 
 registerLocaleData(localePt);
 
@@ -53,10 +56,11 @@ registerLocaleData(localePt);
     ProductReadComponent,
     ProductRead2Component,
     ProductUpdateComponent,
-    DialogDeleteComponent,
     VeiculosComponent,
     VeiculosEntradaComponent,
-    CriarEntradaComponent
+    CriarEntradaComponent,
+    DialogRetirarComponent,
+    RelatorioComponent
   ],
   imports: [
     BrowserModule,
@@ -75,10 +79,24 @@ registerLocaleData(localePt);
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    FlexLayoutModule,
+    MatDatepickerModule,        // <----- import(must)
+    MatNativeDateModule,        // <----- import for date formating(optional)
+  
   ],
-  entryComponents: [DialogDeleteComponent],
-  providers: [{
+  entryComponents: [DialogRetirarComponent],
+  providers: [
+    PrintHook,
+    StyleUtils, 
+    StyleSheet,
+    StylesheetMap, 
+    LayoutStyleBuilder,
+    FlexStyleBuilder,
+    BreakPointRegistry,
+    MediaMarshaller,
+
+    {
     provide: LOCALE_ID,
     useValue: 'pt-BR'
   }],

@@ -1,7 +1,9 @@
+import { DialogRetirarComponent } from './dialog-retirar/dialog-retirar.component';
 import { Veiculo } from './veiculo.model';
 import { VeiculosService } from './veiculos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material';
+import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
+import { ExitPayment } from './exitPayment.model';
 
 @Component({
   selector: 'app-veiculos-entrada',
@@ -10,11 +12,14 @@ import { MatPaginator, PageEvent } from '@angular/material';
 })
 export class VeiculosEntradaComponent implements OnInit {
   veiculosEstacionados : Veiculo[]
+  id_vehicle: Number;
+  placa: String;
+  payment: ExitPayment
 
 
   displayedColumns = ['id', 'placa','modelo','cor','horaEntrada','statusVehicle','action'];
 
-  constructor(private veiculosService: VeiculosService) { }
+  constructor(private veiculosService: VeiculosService, private matDialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   pageSize =5;
@@ -36,5 +41,32 @@ export class VeiculosEntradaComponent implements OnInit {
       this.paginator.length = resp.totalElements;
     })
   }
+
+
+
+  openDialog(exitPayment: ExitPayment){
+    const dialogRef =  this.matDialog.open(DialogRetirarComponent, {
+      data :{
+        exitPayment
+      }
+    })
+ 
+    dialogRef.afterClosed().subscribe(result => {
+       if(result === 'success'){
+         this.getVeiculosEstacionados();
+       }
+    });
+   }
+
+   retirarVeiculo(id_veiculo, placa){
+    this.veiculosService.retirarVeiculoUsingPost(id_veiculo, placa).subscribe(resp => {
+      this.payment = resp;
+      this.veiculosService.showMessage('Retirada Feita com Sucesso');
+      this.openDialog(this.payment)
+    }, err => {
+
+      this.veiculosService.showMessage(err.error.message, true);
+    });
+}
 
 }

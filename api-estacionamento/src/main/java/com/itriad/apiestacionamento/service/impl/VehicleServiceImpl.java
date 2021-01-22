@@ -33,8 +33,8 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Vehicle registerVehicle(Vehicle vehicle) throws ParseException {
 
-        if (vehicle.getPlaca() == null || vehicle.getCor() == null || vehicle.getModelo() == null) {
-            throw new RuntimeException("ERROR");
+        if (vehicle.getPlaca().equals("") || vehicle.getCor().equals("") || vehicle.getModelo().equals("")) {
+            throw new RuntimeException("Campos inválidos!");
         }
 
         LocalTime hora_entrada = LocalTime.now();
@@ -71,8 +71,8 @@ public class VehicleServiceImpl implements VehicleService {
     public Page<Vehicle> findAllVehicleParked(int page, int limit) {
         Page<Vehicle> listVehicle = null;
         PageRequest pageable = PageRequest.of(page-1,limit, Sort.by("placa"));
-        listVehicle = vehicleRepository.findAll(pageable);
-
+        LocalDate data_entrada = LocalDate.now();
+        listVehicle = vehicleRepository.findAllByDataEntradaAndStatusVehicleOrderByHoraEntradaDesc(data_entrada ,StatusVehicle.ESTACIONADO, pageable);
         return listVehicle;
     }
 }

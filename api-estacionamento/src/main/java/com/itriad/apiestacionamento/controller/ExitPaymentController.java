@@ -12,10 +12,10 @@ public class ExitPaymentController {
     @Autowired
     private ExitPaymentService exitPaymentService;
 
-    @PostMapping("/payment")
+    @PostMapping("/payment/{placa}/{id_vehicle}")
     @CrossOrigin("*")
-    ExitPayment createPayment(@RequestParam(value = "placa") String placa,
-                              @RequestParam(value = "id_vehicle") Long idVehicle){
+    ExitPayment createPayment(@PathVariable(value = "placa") String placa,
+                              @PathVariable(value = "id_vehicle") Long idVehicle){
         return exitPaymentService.createExitPayment(placa,idVehicle);
     }
 }

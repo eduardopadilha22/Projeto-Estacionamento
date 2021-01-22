@@ -1,3 +1,4 @@
+import { RelatorioComponent } from './views/relatorio/relatorio.component';
 import { CriarEntradaComponent } from './components/veiculos-entrada/criar-entrada/criar-entrada.component';
 import { VeiculosComponent } from './views/veiculos/veiculos.component';
 import { ProductUpdateComponent } from './components/products/product-update/product-update.component';
@@ -16,6 +17,10 @@ const routes: Routes = [{
 {
   path: "entrada/form",
   component: CriarEntradaComponent
+},
+{
+  path: "relatorio",
+  component: RelatorioComponent
 },
 {
   path: "products/update/:id",

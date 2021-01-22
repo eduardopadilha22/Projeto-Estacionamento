@@ -31,9 +31,9 @@ public class ExitPaymentImpl implements ExitPaymentService {
         LocalDate data_exit = LocalDate.now();
         String dia = Validate.weekDay();
 
-//        if (exitPaymentRepository.findByVehicleAndDataSaida(vehicle, data_exit).isPresent()) {
-//            throw new RuntimeException("Veículo já foi retirado");
-//        }
+        if (exitPaymentRepository.findByVehicleAndDataSaida(vehicle, data_exit).isPresent()) {
+            throw new RuntimeException("Veículo já foi retirado");
+        }
 
 
         Double paymentAmount = validarDiaValor(dia, vehicle.getHoraEntrada(), hora_exit);
