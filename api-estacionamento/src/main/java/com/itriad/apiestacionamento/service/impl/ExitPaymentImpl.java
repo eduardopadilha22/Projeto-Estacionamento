@@ -8,10 +8,18 @@ import com.itriad.apiestacionamento.repository.ExitPaymentRepository;
 import com.itriad.apiestacionamento.repository.VehicleRepository;
 import com.itriad.apiestacionamento.service.ExitPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ExitPaymentImpl implements ExitPaymentService {
@@ -53,6 +61,29 @@ public class ExitPaymentImpl implements ExitPaymentService {
         }
         return exitPayment;
 
+    }
+
+    @Override
+    public List<ExitPayment> generatedReport(String dataInicial, String dataFinal) throws ParseException {
+
+
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("dd/MM/yyy");
+
+        DateTimeFormatter formParam = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String dataInicialFormatada = formParam.format(form.parse(dataInicial));
+        String dataFimFormatada = formParam.format(form.parse(dataFinal));
+
+        LocalDate IDate =  LocalDate.parse(dataInicialFormatada, formParam);
+        LocalDate FDate =  LocalDate.parse(dataFimFormatada, formParam);
+
+        List<ExitPayment> lista = exitPaymentRepository.findByDataSaidaBetween(IDate, FDate);
+
+        if(lista.isEmpty()) {
+            throw  new EntityNotFoundException("Nenhum Faturamento Encontrado");
+        }
+
+        return lista;
     }
 
     public Double validarDiaValor(String dia, LocalTime time_entry, LocalTime time_exit) {

@@ -59,13 +59,16 @@ export class VeiculosEntradaComponent implements OnInit {
    }
 
    retirarVeiculo(id_veiculo, placa){
-    this.veiculosService.retirarVeiculoUsingPost(id_veiculo, placa).subscribe(resp => {
+
+      this.veiculosService.retirarVeiculoUsingPost(id_veiculo, placa).subscribe(resp => {
       this.payment = resp;
       this.veiculosService.showMessage('Retirada Feita com Sucesso');
       this.openDialog(this.payment)
+
     }, err => {
 
       this.veiculosService.showMessage(err.error.message, true);
+      
     });
 }
 

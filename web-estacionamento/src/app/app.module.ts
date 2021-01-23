@@ -41,6 +41,9 @@ import { VeiculosEntradaComponent } from './components/veiculos-entrada/veiculos
 import { CriarEntradaComponent } from './components/veiculos-entrada/criar-entrada/criar-entrada.component';
 import { DialogRetirarComponent } from './components/veiculos-entrada/dialog-retirar/dialog-retirar.component';
 import { RelatorioComponent } from './views/relatorio/relatorio.component';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 registerLocaleData(localePt);
 
@@ -83,7 +86,7 @@ registerLocaleData(localePt);
     FlexLayoutModule,
     MatDatepickerModule,        // <----- import(must)
     MatNativeDateModule,        // <----- import for date formating(optional)
-  
+    NgxMaskModule.forRoot(options)
   ],
   entryComponents: [DialogRetirarComponent],
   providers: [

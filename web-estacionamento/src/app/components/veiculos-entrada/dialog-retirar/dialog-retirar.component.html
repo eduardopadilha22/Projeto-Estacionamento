@@ -41,6 +41,5 @@
 </div>
 
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>No Thanks</button>
-    <button mat-button  color="primary">sim</button>
+    <button mat-button mat-dialog-close (click)="this.dialogRef.close('success');">Fechar</button>
 </div>

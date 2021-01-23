@@ -1,3 +1,4 @@
+import { ExitPayment } from './exitPayment.model';
 import { Observable } from 'rxjs';
 import { Veiculo } from './veiculo.model';
 import { HttpClient } from '@angular/common/http';
@@ -38,6 +39,15 @@ export class VeiculosService {
 
    retirarVeiculoUsingPost(id_vehicle: Number, placa : String ): Observable<any>{
       return this.http.post(`${this.baseUrl}/payment/${placa}/${id_vehicle}`, null );
+   }
+
+   gerarRelatorio(data_inicial, data_final): Observable<any> {
+     return this.http.get(`${this.baseUrl}/report`, {
+       params: {
+        dataInicial: data_inicial,
+        dataFinal: data_final
+       }
+     });
    }
 
 }
