@@ -32,7 +32,7 @@ export class VeiculosEntradaComponent implements OnInit {
   loadingPage(event: PageEvent){
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex+1;
-    
+    this.getVeiculosEstacionados();;
   }
 
   getVeiculosEstacionados(){

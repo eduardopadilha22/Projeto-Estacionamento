@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   get title() : string{
    return  this.headerService.headerData.title
+
   }
   get icon() : string{
    return  this.headerService.headerData.icone

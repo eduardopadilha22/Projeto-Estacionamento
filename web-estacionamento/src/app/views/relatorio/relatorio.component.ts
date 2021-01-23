@@ -1,6 +1,7 @@
 import { VeiculosService } from './../../components/veiculos-entrada/veiculos.service';
 import { ExitPayment } from './../../components/veiculos-entrada/exitPayment.model';
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 
 @Component({
   selector: 'app-relatorio',
@@ -14,7 +15,13 @@ export class RelatorioComponent implements OnInit {
 
   displayedColumns = ['placa', 'modelo','cor','horaEntrada','horaSaida','totalPagamento'];
 
-  constructor(private veiculosService: VeiculosService) { }
+  constructor(private veiculosService: VeiculosService,private headerService: HeaderService) {
+    headerService.headerData = {
+      title: 'Relatório',
+      icone: 'assignment',
+      routeUrl:'/relatorio'
+  }
+   }
 
   ngOnInit() {
   }

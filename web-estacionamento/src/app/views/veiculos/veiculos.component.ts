@@ -1,3 +1,4 @@
+import { HeaderService } from './../../components/template/header/header.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VeiculosComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private headerService: HeaderService) { 
+    headerService.headerData = {
+        title: 'Estacionamento',
+        icone: 'drive_eta',
+        routeUrl:'/'
+    }
+  }
 
   ngOnInit() {
   }

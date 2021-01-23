@@ -1,7 +1,7 @@
 <div mat-dialog-content >
     <mat-card class="payment" >
         <mat-card-header>
-          <mat-card-title>Pagamento</mat-card-title>
+          <mat-card-title>Informações de Pagamento</mat-card-title>
         </mat-card-header>
         <mat-card-content>
            <div class="container">
@@ -19,7 +19,7 @@
             <div>
  
                 <mat-card-title>Entrada e Saída</mat-card-title>
-                <p>{{payment.vehicle.horaEntrada}} até {{ payment.horaSaida }}</p>
+                <mat-card-subtitle>{{payment.vehicle.horaEntrada}} até {{ payment.horaSaida }}</mat-card-subtitle>
                 <p></p>
 
             </div>
@@ -29,7 +29,6 @@
             <div>
                 <mat-card-title>Total a Pagar</mat-card-title>
                 <h3>{{payment.totalPagamento | currency: 'BRL'}}</h3>
-                
             </div>
   
            </div>

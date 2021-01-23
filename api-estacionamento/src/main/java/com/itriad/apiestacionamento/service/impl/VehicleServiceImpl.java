@@ -73,6 +73,7 @@ public class VehicleServiceImpl implements VehicleService {
         PageRequest pageable = PageRequest.of(page-1,limit, Sort.by("placa"));
         LocalDate data_entrada = LocalDate.now();
         listVehicle = vehicleRepository.findAllByDataEntradaAndStatusVehicleOrderByHoraEntradaDesc(data_entrada ,StatusVehicle.ESTACIONADO, pageable);
+
         return listVehicle;
     }
 }
