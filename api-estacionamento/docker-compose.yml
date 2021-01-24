@@ -1,15 +1,16 @@
 version: '2.2'
 services:
-  hola:
+  estacionamentoapi:
     build:
       context: ./
       dockerfile: Dockerfile-build
-    image: holaweb
+    image: estacionamentoapi
     ports:
-      - 8080
+      - 8081:8080
     networks:
       - network1
-    scale: 3
+    environment:
+      - TZ=America/Sao_Paulo
 
 networks:
   network1:

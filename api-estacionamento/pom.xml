@@ -51,11 +51,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        <dependency>
-            <groupId>br.com.pemaza</groupId>
-            <artifactId>pemaza-core</artifactId>
-            <version>2.6.0</version>
-        </dependency>
     </dependencies>
 
 	<build>
